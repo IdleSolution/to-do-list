@@ -61,4 +61,23 @@ describe('Task repository', () => {
       expect(mockPrismaDeleteTask).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe('Mark task as done', () => {
+    it('should mark task as done', async () => {
+      const mockPrismaUpdateTask = jest
+        .spyOn(prismaService.task, 'update')
+        .mockResolvedValue({
+          id: 1,
+          content: 'test',
+          done: true,
+        });
+
+      const result: Task = await taskRepository.markAsDone(1);
+      expect(result).toHaveProperty('id');
+      expect(result).toHaveProperty('content');
+      expect(result).toHaveProperty('done');
+
+      expect(mockPrismaUpdateTask).toHaveBeenCalledTimes(1);
+    });
+  });
 });

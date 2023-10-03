@@ -57,4 +57,17 @@ describe('Task controller', () => {
       expect(deleteTaskServiceSpy).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe('Mark task as done', () => {
+    it('should mark task as done', async () => {
+      const markAsDoneServiceSpy = jest.spyOn(taskService, 'markAsDone');
+
+      const result: TaskResponse = await taskController.markAsDone(1);
+      expect(result).toHaveProperty('id');
+      expect(result).toHaveProperty('content');
+      expect(result).toHaveProperty('done');
+
+      expect(markAsDoneServiceSpy).toHaveBeenCalledTimes(1);
+    });
+  });
 });

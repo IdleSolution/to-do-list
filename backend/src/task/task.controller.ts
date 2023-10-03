@@ -4,6 +4,7 @@ import {
   Delete,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
 } from '@nestjs/common';
 
@@ -23,5 +24,12 @@ export class TaskController {
   @Delete(':id')
   public async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
     return await this.taskService.delete(id);
+  }
+
+  @Patch(':id')
+  public async markAsDone(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<TaskResponse> {
+    return await this.taskService.markAsDone(id);
   }
 }

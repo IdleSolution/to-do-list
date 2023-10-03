@@ -31,4 +31,13 @@ export class TaskRepository {
       },
     });
   }
+
+  public async markAsDone(id: number): Promise<Task> {
+    return await this.prismaService.task.update({
+      where: { id },
+      data: {
+        done: true,
+      },
+    });
+  }
 }
