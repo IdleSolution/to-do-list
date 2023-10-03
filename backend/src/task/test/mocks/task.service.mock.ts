@@ -5,7 +5,7 @@ import { TaskResponse } from '../../responses/task.response';
 import { TaskService } from '../../task.service';
 
 export class TaskServiceMock implements Required<TaskService> {
-  private generateTaskListResponse(): TaskResponse[] {
+  private generateTasksListResponse(): TaskResponse[] {
     const tasks: Task[] = [
       {
         id: 1,
@@ -23,6 +23,6 @@ export class TaskServiceMock implements Required<TaskService> {
   }
 
   public async create(task: CreateTaskDto): Promise<TaskResponse> {
-    return this.generateTaskListResponse()[0];
+    return this.generateTasksListResponse()[0];
   }
 }

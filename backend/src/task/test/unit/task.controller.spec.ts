@@ -24,7 +24,7 @@ describe('Task controller', () => {
     taskController = module.get<TaskController>(TaskController);
   });
 
-  describe('create task', () => {
+  describe('Create task', () => {
     it('should create task and return TaskResponse', async () => {
       const createdTask: CreateTaskDto = {
         content: 'test',

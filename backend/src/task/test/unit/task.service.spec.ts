@@ -7,7 +7,7 @@ import { TaskRepository } from '../../task.repository';
 import { TaskService } from '../../task.service';
 import { TaskRepositoryMock } from '../mocks/task.repository.mock';
 
-describe('task service', () => {
+describe('Task service', () => {
   let taskService: TaskService;
   let taskRepository: TaskRepository;
 
@@ -31,7 +31,7 @@ describe('task service', () => {
     jest.restoreAllMocks();
   });
 
-  describe('create task', () => {
+  describe('Create task', () => {
     it('should create task and return TaskResponse', async () => {
       const createTaskSpy = jest.spyOn(taskRepository, 'create');
 

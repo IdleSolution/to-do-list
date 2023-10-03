@@ -18,7 +18,7 @@ describe('Task repository', () => {
     prismaService = module.get<PrismaService>(PrismaService);
   });
 
-  describe('create task', () => {
+  describe('Create task', () => {
     it('should create task and return Task', async () => {
       const createdTask: CreateTaskDto = {
         content: 'test',

@@ -4,7 +4,7 @@ import { CreateTaskDto } from '../../DTOs/create-task.dto';
 import { TaskRepository } from '../../task.repository';
 
 export class TaskRepositoryMock implements Required<TaskRepository> {
-  private generateTaskDb(): Task[] {
+  private generateTasksDb(): Task[] {
     const tasks: Task[] = [
       {
         id: 1,
@@ -22,6 +22,6 @@ export class TaskRepositoryMock implements Required<TaskRepository> {
   }
 
   public async create(task: CreateTaskDto): Promise<Task> {
-    return this.generateTaskDb()[0];
+    return this.generateTasksDb()[0];
   }
 }
