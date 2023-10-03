@@ -18,6 +18,11 @@ describe('Task repository', () => {
     prismaService = module.get<PrismaService>(PrismaService);
   });
 
+  afterEach(async () => {
+    jest.clearAllMocks();
+    jest.restoreAllMocks();
+  });
+
   describe('Create task', () => {
     it('should create task and return Task', async () => {
       const createdTask: CreateTaskDto = {
@@ -38,6 +43,22 @@ describe('Task repository', () => {
       expect(result).toHaveProperty('done');
 
       expect(mockPrismaCreateTask).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('Delete task', () => {
+    it('should delete task', async () => {
+      const mockPrismaDeleteTask = jest
+        .spyOn(prismaService.task, 'delete')
+        .mockResolvedValue({
+          id: 1,
+          content: 'test',
+          done: false,
+        });
+
+      await taskRepository.delete(1);
+
+      expect(mockPrismaDeleteTask).toHaveBeenCalledTimes(1);
     });
   });
 });

@@ -9,6 +9,7 @@ import { TaskServiceMock } from '../mocks/task.service.mock';
 
 describe('Task controller', () => {
   let taskController: TaskController;
+  let taskService: TaskService;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -22,10 +23,18 @@ describe('Task controller', () => {
     }).compile();
 
     taskController = module.get<TaskController>(TaskController);
+    taskService = module.get<TaskService>(TaskService);
+  });
+
+  afterEach(async () => {
+    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   describe('Create task', () => {
     it('should create task and return TaskResponse', async () => {
+      const createTaskServiceSpy = jest.spyOn(taskService, 'create');
+
       const createdTask: CreateTaskDto = {
         content: 'test',
       };
@@ -34,6 +43,18 @@ describe('Task controller', () => {
       expect(result).toHaveProperty('id');
       expect(result).toHaveProperty('content');
       expect(result).toHaveProperty('done');
+
+      expect(createTaskServiceSpy).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('Delete task', () => {
+    it('should delete task', async () => {
+      const deleteTaskServiceSpy = jest.spyOn(taskService, 'delete');
+
+      await taskController.delete(1);
+
+      expect(deleteTaskServiceSpy).toHaveBeenCalledTimes(1);
     });
   });
 });

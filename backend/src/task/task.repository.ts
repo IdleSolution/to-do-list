@@ -8,10 +8,26 @@ import { PrismaService } from '../prisma/prisma.service';
 export class TaskRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
+  public async get(id: number): Promise<Task> {
+    return await this.prismaService.task.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
   public async create(task: CreateTaskDto): Promise<Task> {
     return await this.prismaService.task.create({
       data: {
         content: task.content,
+      },
+    });
+  }
+
+  public async delete(id: number): Promise<void> {
+    await this.prismaService.task.delete({
+      where: {
+        id,
       },
     });
   }
