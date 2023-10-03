@@ -36,4 +36,8 @@ export class TaskRepositoryMock implements Required<TaskRepository> {
   public async delete(id: number): Promise<void> {
     return;
   }
+
+  public async markAsDone(id: number): Promise<Task> {
+    return this.generateTasksDb()[0];
+  }
 }
