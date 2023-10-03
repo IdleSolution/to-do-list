@@ -22,6 +22,10 @@ export class TaskServiceMock implements Required<TaskService> {
     return tasks.map((task) => new TaskResponse(task));
   }
 
+  public async list(): Promise<TaskResponse[]> {
+    return this.generateTasksListResponse();
+  }
+
   public async create(task: CreateTaskDto): Promise<TaskResponse> {
     return this.generateTasksListResponse()[0];
   }

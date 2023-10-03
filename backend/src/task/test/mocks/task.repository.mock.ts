@@ -21,6 +21,10 @@ export class TaskRepositoryMock implements Required<TaskRepository> {
     return tasks;
   }
 
+  public async getMany(): Promise<Task[]> {
+    return this.generateTasksDb();
+  }
+
   public async get(id: number): Promise<Task> {
     return this.generateTasksDb()[0];
   }
