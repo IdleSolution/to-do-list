@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Task } from '@prisma/client';
 
 import { CreateTaskDto } from '../../DTOs/create-task.dto';
+import { TaskAlreadyDoneException } from '../../errors/task-already-done.exception';
 import { TaskDoesNotExistException } from '../../errors/task-does-not-exist.exception';
 import { TaskResponse } from '../../responses/task.response';
 import { TaskRepository } from '../../task.repository';
@@ -77,6 +78,7 @@ describe('Task service', () => {
     });
   });
 
+<<<<<<< HEAD
   describe('Get tasks', () => {
     it('should return all tasks', async () => {
       const getManyTasksSpy = jest.spyOn(taskRepository, 'getMany');
@@ -93,6 +95,52 @@ describe('Task service', () => {
       });
 
       expect(getManyTasksSpy).toHaveBeenCalledTimes(1);
+=======
+  describe('Mark task as done', () => {
+    it('should mark task as done', async () => {
+      const markAsDoneServiceSpy = jest.spyOn(taskRepository, 'markAsDone');
+
+      const result: TaskResponse = await taskService.markAsDone(1);
+      expect(result).toHaveProperty('id');
+      expect(result).toHaveProperty('content');
+      expect(result).toHaveProperty('done');
+
+      expect(markAsDoneServiceSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should throw error on non existing task', async () => {
+      const getTaskSpy = jest
+        .spyOn(taskRepository, 'get')
+        .mockResolvedValue(null);
+
+      const markAsDoneRepositorySpy = jest.spyOn(taskRepository, 'markAsDone');
+
+      await expect(async () => taskService.markAsDone(1)).rejects.toThrow(
+        TaskDoesNotExistException,
+      );
+
+      expect(markAsDoneRepositorySpy).toHaveBeenCalledTimes(0);
+      expect(getTaskSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should throw error when task is already done', async () => {
+      const markAsDoneRepositorySpy = jest.spyOn(taskRepository, 'markAsDone');
+
+      const getTaskRepositorySpy = jest
+        .spyOn(taskRepository, 'get')
+        .mockResolvedValue({
+          id: 1,
+          content: 'test',
+          done: true,
+        });
+
+      await expect(async () => taskService.markAsDone(1)).rejects.toThrow(
+        TaskAlreadyDoneException,
+      );
+
+      expect(markAsDoneRepositorySpy).toHaveBeenCalledTimes(0);
+      expect(getTaskRepositorySpy).toHaveBeenCalledTimes(1);
+>>>>>>> 5d93eb6 (feat(backend): mark task as done)
     });
   });
 });
