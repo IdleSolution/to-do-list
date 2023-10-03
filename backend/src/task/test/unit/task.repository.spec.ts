@@ -62,7 +62,6 @@ describe('Task repository', () => {
     });
   });
 
-<<<<<<< HEAD
   describe('Get tasks', () => {
     it('should return all tasks', async () => {
       const mockPrismaFindManyTask = jest
@@ -87,7 +86,9 @@ describe('Task repository', () => {
       });
 
       expect(mockPrismaFindManyTask).toHaveBeenCalledTimes(1);
-=======
+    });
+  });
+
   describe('Mark task as done', () => {
     it('should mark task as done', async () => {
       const mockPrismaUpdateTask = jest
@@ -104,7 +105,6 @@ describe('Task repository', () => {
       expect(result).toHaveProperty('done');
 
       expect(mockPrismaUpdateTask).toHaveBeenCalledTimes(1);
->>>>>>> 5d93eb6 (feat(backend): mark task as done)
     });
   });
 });

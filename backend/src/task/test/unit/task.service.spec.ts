@@ -78,7 +78,6 @@ describe('Task service', () => {
     });
   });
 
-<<<<<<< HEAD
   describe('Get tasks', () => {
     it('should return all tasks', async () => {
       const getManyTasksSpy = jest.spyOn(taskRepository, 'getMany');
@@ -95,7 +94,9 @@ describe('Task service', () => {
       });
 
       expect(getManyTasksSpy).toHaveBeenCalledTimes(1);
-=======
+    });
+  });
+
   describe('Mark task as done', () => {
     it('should mark task as done', async () => {
       const markAsDoneServiceSpy = jest.spyOn(taskRepository, 'markAsDone');
@@ -140,7 +141,6 @@ describe('Task service', () => {
 
       expect(markAsDoneRepositorySpy).toHaveBeenCalledTimes(0);
       expect(getTaskRepositorySpy).toHaveBeenCalledTimes(1);
->>>>>>> 5d93eb6 (feat(backend): mark task as done)
     });
   });
 });
