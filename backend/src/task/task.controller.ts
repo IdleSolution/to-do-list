@@ -16,12 +16,12 @@ export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
   @Post()
-  async create(@Body() task: CreateTaskDto): Promise<TaskResponse> {
+  public async create(@Body() task: CreateTaskDto): Promise<TaskResponse> {
     return await this.taskService.create(task);
   }
 
   @Delete(':id')
-  async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
+  public async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
     return await this.taskService.delete(id);
   }
 }
