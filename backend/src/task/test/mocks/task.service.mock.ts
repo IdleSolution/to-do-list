@@ -25,4 +25,8 @@ export class TaskServiceMock implements Required<TaskService> {
   public async create(task: CreateTaskDto): Promise<TaskResponse> {
     return this.generateTasksListResponse()[0];
   }
+
+  public async delete(id: number): Promise<void> {
+    return;
+  }
 }

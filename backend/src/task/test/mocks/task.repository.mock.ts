@@ -21,7 +21,15 @@ export class TaskRepositoryMock implements Required<TaskRepository> {
     return tasks;
   }
 
+  public async get(id: number): Promise<Task> {
+    return this.generateTasksDb()[0];
+  }
+
   public async create(task: CreateTaskDto): Promise<Task> {
     return this.generateTasksDb()[0];
+  }
+
+  public async delete(id: number): Promise<void> {
+    return;
   }
 }
