@@ -57,4 +57,23 @@ describe('Task controller', () => {
       expect(deleteTaskServiceSpy).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe('Get tasks', () => {
+    it('should return all tasks', async () => {
+      const getManyTasksServiceSpy = jest.spyOn(taskService, 'list');
+
+      const result = await taskController.list();
+
+      expect(Array.isArray(result)).toBe(true);
+      expect(result.length).toBe(2);
+
+      result.forEach((task) => {
+        expect(task).toHaveProperty('id');
+        expect(task).toHaveProperty('content');
+        expect(task).toHaveProperty('done');
+      });
+
+      expect(getManyTasksServiceSpy).toHaveBeenCalledTimes(1);
+    });
+  });
 });

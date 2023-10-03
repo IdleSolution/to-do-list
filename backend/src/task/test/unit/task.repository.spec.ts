@@ -61,4 +61,31 @@ describe('Task repository', () => {
       expect(mockPrismaDeleteTask).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe('Get tasks', () => {
+    it('should return all tasks', async () => {
+      const mockPrismaFindManyTask = jest
+        .spyOn(prismaService.task, 'findMany')
+        .mockResolvedValue([
+          {
+            id: 1,
+            content: 'test',
+            done: false,
+          },
+        ]);
+
+      const result = await taskRepository.getMany();
+
+      expect(Array.isArray(result)).toBe(true);
+      expect(result.length).toBe(1);
+
+      result.forEach((task) => {
+        expect(task).toHaveProperty('id');
+        expect(task).toHaveProperty('content');
+        expect(task).toHaveProperty('done');
+      });
+
+      expect(mockPrismaFindManyTask).toHaveBeenCalledTimes(1);
+    });
+  });
 });

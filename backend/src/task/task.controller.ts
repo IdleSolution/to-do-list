@@ -2,8 +2,10 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
 } from '@nestjs/common';
 
@@ -14,6 +16,11 @@ import { TaskService } from './task.service';
 @Controller('task')
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
+
+  @Get()
+  public async list(): Promise<TaskResponse[]> {
+    return await this.taskService.list();
+  }
 
   @Post()
   public async create(@Body() task: CreateTaskDto): Promise<TaskResponse> {

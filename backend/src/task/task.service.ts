@@ -9,6 +9,12 @@ import { TaskRepository } from './task.repository';
 export class TaskService {
   constructor(private readonly taskRepository: TaskRepository) {}
 
+  public async list(): Promise<TaskResponse[]> {
+    const tasks = await this.taskRepository.getMany();
+
+    return tasks.map((task) => new TaskResponse(task));
+  }
+
   public async create(task: CreateTaskDto): Promise<TaskResponse> {
     const createdTask = await this.taskRepository.create(task);
 
