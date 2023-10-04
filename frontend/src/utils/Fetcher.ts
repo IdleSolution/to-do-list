@@ -43,7 +43,7 @@ class Fetcher {
     }
   };
 
-  patchData = async <T>(route: string, body: any): Promise<T> => {
+  patchData = async <T>(route: string, body?: any): Promise<T> => {
     try {
       const response = await api.patch<T>(
         `${this.proxy}${route}`,

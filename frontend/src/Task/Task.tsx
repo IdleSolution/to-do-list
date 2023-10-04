@@ -1,15 +1,24 @@
 import React from 'react';
-import { Container } from './styles';
+import { Button, Container, IconContainer, Text } from './styles';
 import { TaskInterface } from '../types/types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+
 
 interface Props {
     task: TaskInterface;
+    markTaskAsDone: (taskId: number) => void;
+    removeTask: (taskId: number) => void;
 }
 
-const Task = ({task}: Props) => {
+const Task = ({task, markTaskAsDone, removeTask}: Props) => {
     return (
         <Container>
-            {task.content}
+            <Button onClick={() => markTaskAsDone(task.id)} isDone={task.done}/>
+            <Text isDone={task.done}>{task.content}</Text>
+            <IconContainer onClick={() => removeTask(task.id)}>
+                <FontAwesomeIcon icon={faTrash} />
+            </IconContainer>
         </Container>
     )
 }
