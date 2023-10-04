@@ -11,11 +11,13 @@ export class TaskServiceMock implements Required<TaskService> {
         id: 1,
         content: 'test',
         done: false,
+        createdAt: new Date(),
       },
       {
         id: 2,
         content: 'test 2',
         done: false,
+        createdAt: new Date(),
       },
     ];
 
