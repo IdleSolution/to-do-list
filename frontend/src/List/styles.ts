@@ -8,7 +8,6 @@ export const Container = styled.div`
     flex-flow: column;
     min-height: 20rem;
     max-height: 40rem;
-    padding-bottom: 7rem;
     border-radius: 5px;
     overflow-y: scroll;
 
