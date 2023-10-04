@@ -9,7 +9,9 @@ export class TaskRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   public async getMany(): Promise<Task[]> {
-    return await this.prismaService.task.findMany();
+    return await this.prismaService.task.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
   }
 
   public async get(id: number): Promise<Task> {

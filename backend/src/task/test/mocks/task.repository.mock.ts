@@ -10,11 +10,13 @@ export class TaskRepositoryMock implements Required<TaskRepository> {
         id: 1,
         content: 'test',
         done: false,
+        createdAt: new Date(),
       },
       {
         id: 2,
         content: 'test 2',
         done: false,
+        createdAt: new Date(),
       },
     ];
 
