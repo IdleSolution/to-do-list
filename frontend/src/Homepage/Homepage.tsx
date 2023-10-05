@@ -28,7 +28,6 @@ const Homepage = () => {
         event.preventDefault();
         if(newTask.length > 0) {
             setLoading(true);
-            setTasks([{id: 0, content: newTask, done: false}, ...tasks]);
             const createdTask = await fetcherInstance.postData<TaskInterface>('/task', {
                 content: newTask
             });
@@ -39,16 +38,20 @@ const Homepage = () => {
     }
 
     const markTaskAsDone = async (taskId: number) => {
-        await fetcherInstance.patchData(`/task/${taskId}`);
-        const newState = tasks.map(task => {
-            if(task.id === taskId) {
-                return { ...task, done: true }
-            }
+        const taskToMark = tasks.find((t) => t.id === taskId);
+        if(!taskToMark?.done) {
+            await fetcherInstance.patchData(`/task/${taskId}`);
+            const newState = tasks.map(task => {
+                if(task.id === taskId) {
+                    return { ...task, done: true }
+                }
+    
+                return task;
+            })
+    
+            setTasks(newState);
+        }
 
-            return task;
-        })
-
-        setTasks(newState);
     }
 
     const removeTask = async (taskId: number) => {

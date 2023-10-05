@@ -14,9 +14,9 @@ interface Props {
 const Task = ({task, markTaskAsDone, removeTask}: Props) => {
     return (
         <Container>
-            <Button onClick={() => markTaskAsDone(task.id)} isDone={task.done}/>
+            <Button data-testid="markAsDoneButton" onClick={() => markTaskAsDone(task.id)} isDone={task.done}/>
             <Text isDone={task.done}>{task.content}</Text>
-            <IconContainer onClick={() => removeTask(task.id)}>
+            <IconContainer data-testid="removeTaskButton" onClick={() => removeTask(task.id)}>
                 <FontAwesomeIcon icon={faTrash} />
             </IconContainer>
         </Container>
