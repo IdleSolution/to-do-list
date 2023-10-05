@@ -7,7 +7,7 @@ class Fetcher {
   proxy: string;
 
   constructor() {
-    this.proxy = 'http://localhost:3001';
+    this.proxy = `http://localhost:${process.env.BACKEND_URL ?? 3002}`;
   }
 
   fetchData = async <T>(route: string): Promise<T> => {
