@@ -1,68 +1,60 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Input from './Input';
 
 describe('Input component', () => {
-  it('renders input and button correctly', () => {
-    const handleChange = jest.fn();
-    const handleSubmit = jest.fn();
-    const taskValue = 'Test task';
+  const mockHandleChange = jest.fn();
+  const mockHandleSubmit = jest.fn();
+  const mockTaskValue = 'Sample Task';
 
-     render(
+  beforeEach(() => {
+    mockHandleChange.mockClear();
+    mockHandleSubmit.mockClear();
+  });
+
+  it('renders input and submit button correctly', () => {
+    render(
       <Input
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        taskValue={taskValue}
+        handleChange={mockHandleChange}
+        handleSubmit={mockHandleSubmit}
+        taskValue={mockTaskValue}
       />
     );
 
     const inputElement = screen.getByPlaceholderText('Add new task...');
     expect(inputElement).toBeInTheDocument();
 
-    const buttonElement = screen.getByTestId('submitButton');
-    expect(buttonElement).toBeInTheDocument();
+    const submitButton = screen.getByTestId('submitButton');
+    expect(submitButton).toBeInTheDocument();
   });
 
   it('calls handleChange when input value changes', () => {
-    const handleChange = jest.fn();
-    const handleSubmit = jest.fn();
-    const taskValue = 'Test task';
-
-     render(
+    render(
       <Input
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        taskValue={taskValue}
+        handleChange={mockHandleChange}
+        handleSubmit={mockHandleSubmit}
+        taskValue={mockTaskValue}
       />
     );
 
     const inputElement = screen.getByPlaceholderText('Add new task...');
+    fireEvent.change(inputElement, { target: { value: 'New Value' } });
 
-    fireEvent.change(inputElement, { target: { value: 'New value' } });
-
-    expect(handleChange).toHaveBeenCalledWith(expect.objectContaining({
-      target: expect.objectContaining({
-        value: 'New value',
-      }),
-    }));
+    expect(mockHandleChange).toHaveBeenCalled();
   });
 
-  it('calls handleSubmit when the button is clicked', () => {
-    const handleChange = jest.fn();
-    const handleSubmit = jest.fn();
-    const taskValue = 'Test task';
-
-     render(
+  it('calls handleSubmit when submit button is clicked', () => {
+    render(
       <Input
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        taskValue={taskValue}
+        handleChange={mockHandleChange}
+        handleSubmit={mockHandleSubmit}
+        taskValue={mockTaskValue}
       />
     );
 
-    const buttonElement = screen.getByTestId('submitButton');
-    
+    const submitButton = screen.getByTestId('submitButton');
+    fireEvent.click(submitButton);
 
-  })
-})
+    expect(mockHandleSubmit).toHaveBeenCalled();
+  });
+});

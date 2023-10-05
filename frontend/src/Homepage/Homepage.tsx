@@ -1,4 +1,4 @@
-import List from "../List";
+import List from "./../List/List"
 import React, { useEffect, useState } from 'react';
 import { Container } from "./styles";
 import Input from "../Task/Input/Input";
