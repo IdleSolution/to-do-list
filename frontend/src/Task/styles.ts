@@ -11,11 +11,11 @@ export const Container = styled.div`
     position: relative;
 `
 
-export const Button = styled.div<{ isDone: boolean }>`
+export const Button = styled.div<{ $isDone: boolean }>`
     width: 30px;
     height: 30px;
     border-radius: 50%; 
-    border: ${props => props.isDone ? 'none' : '1px solid rgb(108, 108, 117);'};
+    border: ${props => props.$isDone ? 'none' : '1px solid rgb(108, 108, 117);'};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,12 +25,12 @@ export const Button = styled.div<{ isDone: boolean }>`
     left: 2%;
     transform: translate(0, -50%);
     cursor: pointer;
-    background-color: ${props => props.isDone ? '#00C6C2' : 'transparent'};
+    background-color: ${props => props.$isDone ? '#00C6C2' : 'transparent'};
 `
 
-export const Text = styled.p<{ isDone: boolean }>`
+export const Text = styled.p<{ $isDone: boolean }>`
     font-size: 2rem;
-    text-decoration: ${props => props.isDone ? 'line-through' : 'none'};
+    text-decoration: ${props => props.$isDone ? 'line-through' : 'none'};
 `
 
 export const IconContainer = styled.div`

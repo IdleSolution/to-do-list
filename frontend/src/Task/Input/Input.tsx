@@ -11,7 +11,7 @@ interface Props {
 const Input = ({handleChange, handleSubmit, taskValue}: Props) => {
     return (
         <Container>
-            <Button onClick={handleSubmit}/>
+            <Button data-testid="submitButton" onClick={handleSubmit}/>
             <InputContainer placeholder='Add new task...' onChange={handleChange} value={taskValue}/>
         </Container>
 
